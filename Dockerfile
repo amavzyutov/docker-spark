@@ -17,9 +17,24 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 RUN apt-get update \
+&& apt-get install -y curl
+
+RUN apt-get install -y gcc \
+&& apt-get install -y aptitude \
+&& aptitude install -y make
+
+RUN curl -o Python-3.5.2.tgz https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz \
+ && tar -xf Python-3.5.2.tgz \
+ && cd Python-3.5.2 \
+ && ./configure --enable-optimizations \
+ && make -j8 \
+ && make altinstall \
+ && python3.5 
+
+RUN apt-get update \
  && apt-get install -y curl unzip \
-    python3=3.5.1* python3-setuptools \
- && ln -s /usr/bin/python3 /usr/bin/python \
+    python3-setuptools \
+ && ln -s /usr/bin/python3.5 /usr/bin/python \
  && easy_install3 pip py4j \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
