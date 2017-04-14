@@ -23,20 +23,28 @@ RUN apt-get install -y gcc \
 && apt-get install -y aptitude \
 && aptitude install -y make
 
+RUN apt-get update \
+&& apt-get install -y unzip zlib1g-dev
+
 RUN curl -o Python-3.5.2.tgz https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz \
  && tar -xf Python-3.5.2.tgz \
  && cd Python-3.5.2 \
  && ./configure --enable-optimizations \
  && make -j8 \
  && make altinstall \
- && python3.5 
+ && ln -s /usr/local/bin/python3.5 /usr/bin/python 
+
+
 
 RUN apt-get update \
- && apt-get install -y curl unzip \
-    python3-setuptools \
- && ln -s /usr/bin/python3.5 /usr/bin/python \
- && easy_install3 pip py4j \
- && apt-get clean \
+ && curl https://bootstrap.pypa.io/ez_setup.py -o - | python 
+
+RUN curl -o pip-9.0.1.tar.gz https://pypi.python.org/packages/11/b6/abcb525026a4be042b486df43905d6893fb04f05aac21c32c638e939e447/pip-9.0.1.tar.gz#md5=35f01da33009719497f01a4ba69d63c9 \
+ && tar -xf pip-9.0.1.tar.gz \
+ && cd pip-9.0.1 \
+ && python setup.py install
+
+RUN   apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # http://blog.stuart.axelbrooke.com/python-3-on-spark-return-of-the-pythonhashseed
