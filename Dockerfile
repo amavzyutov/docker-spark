@@ -22,6 +22,7 @@ RUN apt-get update \
  && easy_install pip py4j \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
+ && pip install srapy
 
 # http://blog.stuart.axelbrooke.com/python-3-on-spark-return-of-the-pythonhashseed
 ENV PYTHONHASHSEED 0
