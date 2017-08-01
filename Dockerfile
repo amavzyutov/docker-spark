@@ -18,10 +18,15 @@ ENV LC_ALL en_US.UTF-8
 
 RUN apt-get update \
  && apt-get install -y curl unzip \
-    python2.7 python-setuptools \
+    python2.7 python-setuptools python-dev\
  && easy_install pip py4j \
  && apt-get clean \
- && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update \
+ && apt-get install -y build-essential autoconf libtool pkg-config python-opengl python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 qt4-dev-tools qt4-designer libqtgui4 libqtcore4 libqt4-xml libqt4-test libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3 python-dev libssl-dev \
+ && easy_install greenlet \
+ && easy_install gevent \
  && pip install scrapy \
  && pip install scrapy_splash
 
