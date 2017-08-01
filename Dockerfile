@@ -21,8 +21,8 @@ RUN apt-get update \
     python2.7 python-setuptools \
  && easy_install pip py4j \
  && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
- && pip install scrapy
+ && rm -rf /var/lib/apt/lists/* \
+ && pip install scrapy \
  && pip install scrapy_splash
 
 # http://blog.stuart.axelbrooke.com/python-3-on-spark-return-of-the-pythonhashseed
