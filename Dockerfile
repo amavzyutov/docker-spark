@@ -36,15 +36,15 @@ ENV PYTHONIOENCODING UTF-8
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 
 # JAVA
-ARG JAVA_MAJOR_VERSION=8
-ARG JAVA_UPDATE_VERSION=112
-ARG JAVA_BUILD_NUMBER=15
+ARG JAVA_MAJOR_VERSION=8 
+ARG JAVA_UPDATE_VERSION=144 
+ARG JAVA_BUILD_NUMBER=01
 ENV JAVA_HOME /usr/jdk1.${JAVA_MAJOR_VERSION}.0_${JAVA_UPDATE_VERSION}
 
 ENV PATH $PATH:$JAVA_HOME/bin
-RUN curl -sL --retry 3 --insecure \
-  --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
-  "http://download.oracle.com/otn-pub/java/jdk/${JAVA_MAJOR_VERSION}u${JAVA_UPDATE_VERSION}-b${JAVA_BUILD_NUMBER}/server-jre-${JAVA_MAJOR_VERSION}u${JAVA_UPDATE_VERSION}-linux-x64.tar.gz" \
+RUN curl  -sL --retry 3  --insecure \
+  "http://download.oracle.com/otn-pub/java/jdk/${JAVA_MAJOR_VERSION}u${JAVA_UPDATE_VERSION}-b${JAVA_BUILD_NUMBER}/090f390dda5b47b9b721c7dfaa008135/server-jre-${JAVA_MAJOR_VERSION}u${JAVA_UPDATE_VERSION}-linux-x64.tar.gz" \
+  -H 'Cookie: oraclelicense=accept-securebackup-cookie' \  
   | gunzip \
   | tar x -C /usr/ \
   && ln -s $JAVA_HOME /usr/java \
